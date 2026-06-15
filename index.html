@@ -3,12 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phaser 3.9 Template</title>
+    <title>Wanted</title>
 
     <script src="./lib/phaser.js"></script>
+    <script src="./src/prefabs/Unknwon.js"></script>
+    <script src="./src/scenes/Initialize.js"></script>
+    <script src="./src/scenes/play.js"></script>
     <script src="./src/main.js"></script>
+
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
-    
+    <div id="game"></div>
 </body>
 </html>

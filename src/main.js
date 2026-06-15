@@ -3,15 +3,15 @@
 "use strict"
 
 let config = {
-    //parent: 'game',
+    parent: 'game',
     type: Phaser.AUTO,
     width: 800,
     height: 600,
-    //backgroundColor: '#FACADE',
-    /*render: {
+    backgroundColor: '#00ccff',
+    render: {
         pixelArt: true
-    },*/
-    /*physics: {
+    },
+    physics: {
         default: 'arcade',
         arcade: {
             gravity: { 
@@ -20,12 +20,12 @@ let config = {
             },
             debug: false
         }
-    },*/
-    /*scale: {
+    },
+    scale: {
         mode: Phaser.Scale.NONE,
         autoCenter: Phaser.Scale.CENTER_BOTH
-    },*/
-    scene: [  ]
+    },
+    scene: [ Initialize, Play ]
 }
 
 let width = config.width;
