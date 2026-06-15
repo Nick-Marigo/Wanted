@@ -13,12 +13,13 @@ class Play extends Phaser.Scene {
 
     create() {
 
-        const randomSpawn = this.createRandomSpawnPoint();
+        this.targetArray = [];
 
-        this.UnknwonArray = [];
-
-        this.unknwon = new Unknwon(this, randomSpawn.x, randomSpawn.y, 'slug');
-
+        for (let i = 0; i < 5; i++) {
+            const randomSpawn = this.createRandomSpawnPoint();
+            this.target = new Target(this, randomSpawn.x, randomSpawn.y, 'slug', false);
+            this.targetArray.push(this.target);
+        }
 
         // DEBUG: R key to restart scene
         this.input.keyboard.on('keydown-R', () => {
@@ -42,11 +43,10 @@ class Play extends Phaser.Scene {
         
     }
 
+    // Returns a random x and y spawn point.
     createRandomSpawnPoint(){
-
         const randomX = Phaser.Math.Between(0, width);
         const randomY = Phaser.Math.Between(0, height);
-
         return new Phaser.Math.Vector2(randomX, randomY);
     }
 
