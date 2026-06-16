@@ -31,4 +31,7 @@ let config = {
 let width = config.width;
 let height = config.height;
 
-let game = new Phaser.Game(config)
+let game = new Phaser.Game(config);
+
+const EVENT_TIMER_ADD = 'timerAdd';
+const EVENT_TIMER_SUBTRACT = 'timerSubtract';

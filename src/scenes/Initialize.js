@@ -4,7 +4,9 @@ class Initialize extends Phaser.Scene {
     }
 
     preload() {
-        
+        this.load.setPath('./Assets/Sprites');
+        this.load.image('slug', '/Slug.png');
+        this.load.image('banana', '/Banana.png');
     }
 
     create() {
