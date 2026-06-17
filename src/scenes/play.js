@@ -12,17 +12,7 @@ class Play extends Phaser.Scene {
 
         this.timer = new GameTimer(this, 30);
 
-        for (let i = 0; i < 5; i++) {
-            const randomSpawn = this.createRandomSpawnPoint();
-            if(i == 3) {
-                this.target = new Target(this, randomSpawn.x, randomSpawn.y, 'slug', true);
-                this.wantedX = this.target.x;
-                this.wantedY = this.target.y;
-            } else {
-                this.target = new Target(this, randomSpawn.x, randomSpawn.y, 'banana', false);
-            }
-            this.targetArray.push(this.target);
-        }
+        this.spawnTargets();
 
         // Handles mouse input anywhere on the map
         this.input.on('pointerdown', (pointer) => {
@@ -30,6 +20,7 @@ class Play extends Phaser.Scene {
             if(this.checkIfWanted(pointer)){
                 console.log("Found wanted");
                 this.timer.addtime(5);
+                this.spawnTargets();
             } else {
                 console.log("Not wanted");
                 this.timer.subtractTime(10);
@@ -65,11 +56,30 @@ class Play extends Phaser.Scene {
         return new Phaser.Math.Vector2(randomX, randomY);
     }
 
+    // Checks if the pointer click is over the target
     checkIfWanted(pointer) {
         return (this.wantedX - 16 < pointer.x && 
                 this.wantedX + 16 > pointer.x && 
                 this.wantedY - 16 < pointer.y && 
                 this.wantedY + 16 > pointer.y)
+    }
+
+    spawnTargets(){
+
+        this.targetArray.forEach(gameObject => gameObject.destroy());
+        this.targetArray = [];
+
+        for (let i = 0; i < 5; i++) {
+        const randomSpawn = this.createRandomSpawnPoint();
+        if(i == 3) {
+            this.target = new Target(this, randomSpawn.x, randomSpawn.y, 'slug', true);
+            this.wantedX = this.target.x;
+            this.wantedY = this.target.y;
+        } else {
+            this.target = new Target(this, randomSpawn.x, randomSpawn.y, 'banana', false);
+        }
+        this.targetArray.push(this.target);
+        }
     }
 
 }
