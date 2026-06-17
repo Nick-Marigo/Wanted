@@ -9,7 +9,8 @@ class Play extends Phaser.Scene {
         this.targetArray = [];
         this.wantedX = 0;
         this.wantedY = 0;
-        this.timeRemaining = 6000;
+
+        this.timer = new GameTimer(this, 30);
 
         for (let i = 0; i < 5; i++) {
             const randomSpawn = this.createRandomSpawnPoint();
@@ -23,25 +24,15 @@ class Play extends Phaser.Scene {
             this.targetArray.push(this.target);
         }
 
-        this.gameTimer = this.time.addEvent({
-            delay: 1000, 
-            callback: this.timerSubtract(), 
-            callbackScope: this, 
-            loop: true
-        });
-
-        this.events.on(EVENT_TIMER_SUBTRACT, this.timerSubtract, this);
-        this.events.on(EVENT_TIMER_ADD, this.timerAdd, this);
-
         // Handles mouse input anywhere on the map
         this.input.on('pointerdown', (pointer) => {
             //console.log(pointer.x, pointer.y, this.wantedX, this.wantedY);
             if(this.checkIfWanted(pointer)){
                 console.log("Found wanted");
-                this.event.emit(EVENT_TIMER_ADD);
+                this.timer.addtime(5);
             } else {
                 console.log("Not wanted");
-                this.events.emit(EVENT_TIMER_SUBTRACT);
+                this.timer.subtractTime(10);
             }
         });
 
@@ -61,8 +52,6 @@ class Play extends Phaser.Scene {
             }
         });
 
-        
-
     }
 
     update() {
@@ -81,16 +70,6 @@ class Play extends Phaser.Scene {
                 this.wantedX + 16 > pointer.x && 
                 this.wantedY - 16 < pointer.y && 
                 this.wantedY + 16 > pointer.y)
-    }
-
-    timerAdd(){
-        this.timeRemaining += 5000;
-        console.log("Time remaining: " + this.timeRemaining);
-    }
-
-    timerSubtract(){
-        this.timeRemaining -= 1000;
-        console.log("Time remaining: " + this.timeRemaining);
     }
 
 }
