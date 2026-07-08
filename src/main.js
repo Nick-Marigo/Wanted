@@ -11,16 +11,6 @@ let config = {
     render: {
         pixelArt: true
     },
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { 
-                x: 0,
-                y: 0,
-            },
-            debug: false
-        }
-    },
     scale: {
         mode: Phaser.Scale.NONE,
         autoCenter: Phaser.Scale.CENTER_BOTH

@@ -34,6 +34,7 @@ class GameTimer {
         this.gameTimer.pause = pause;
     }
 
+    //TODO: Call before switching off of play scene
     destory(){
         this.gameTimer.destory();
         this.timerText.destory();

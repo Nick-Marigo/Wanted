@@ -31,17 +31,6 @@ class Play extends Phaser.Scene {
             this.scene.restart();
         });
 
-        // DEBUG: G key to draw debug boxes on/off
-        this.physics.world.createDebugGraphic();
-        this.physics.world.drawDebug = false;
-        this.input.keyboard.on('keydown-G', () => {
-            this.physics.world.drawDebug = !this.physics.world.drawDebug;
-
-            if (!this.physics.world.drawDebug) {
-                this.physics.world.debugGraphic.clear();
-            }
-        });
-
     }
 
     update() {
@@ -73,13 +62,13 @@ class Play extends Phaser.Scene {
         if(i == 3) {
             this.tempTarget = new Target(this, randomSpawn.x, randomSpawn.y, 'slug', true);
             this.target = this.tempTarget;
-            //this.wantedX = this.target.x;
-            //this.wantedY = this.target.y;
         } else {
             this.tempTarget = new Target(this, randomSpawn.x, randomSpawn.y, 'banana', false);
         }
         this.targetArray.push(this.tempTarget);
         }
     }
+
+    
 
 }
