@@ -1,4 +1,4 @@
-class Target extends Phaser.Physics.Arcade.Sprite{
+class Target extends Phaser.GameObjects.Image{
 
     constructor(scene, x, y, texture, isWanted){
         super(scene, x, y, texture);
@@ -7,7 +7,7 @@ class Target extends Phaser.Physics.Arcade.Sprite{
         this.isWanted = isWanted;
 
         scene.add.existing(this);
-        scene.physics.add.existing(this);
+        //scene.physics.add.existing(this);
 
         this.setScale(2);
 

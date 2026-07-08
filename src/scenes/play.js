@@ -7,8 +7,7 @@ class Play extends Phaser.Scene {
     create() {
 
         this.targetArray = [];
-        this.wantedX = 0;
-        this.wantedY = 0;
+        this.target;
 
         this.timer = new GameTimer(this, 30);
 
@@ -58,27 +57,28 @@ class Play extends Phaser.Scene {
 
     // Checks if the pointer click is over the target
     checkIfWanted(pointer) {
-        return (this.wantedX - 16 < pointer.x && 
-                this.wantedX + 16 > pointer.x && 
-                this.wantedY - 16 < pointer.y && 
-                this.wantedY + 16 > pointer.y)
+        return (this.target.x - 16 < pointer.x && 
+                this.target.x + 16 > pointer.x && 
+                this.target.y - 16 < pointer.y && 
+                this.target.y + 16 > pointer.y)
     }
 
     spawnTargets(){
 
-        this.targetArray.forEach(gameObject => gameObject.destroy());
+        this.targetArray.forEach(image => image.destroy());
         this.targetArray = [];
 
         for (let i = 0; i < 5; i++) {
         const randomSpawn = this.createRandomSpawnPoint();
         if(i == 3) {
-            this.target = new Target(this, randomSpawn.x, randomSpawn.y, 'slug', true);
-            this.wantedX = this.target.x;
-            this.wantedY = this.target.y;
+            this.tempTarget = new Target(this, randomSpawn.x, randomSpawn.y, 'slug', true);
+            this.target = this.tempTarget;
+            //this.wantedX = this.target.x;
+            //this.wantedY = this.target.y;
         } else {
-            this.target = new Target(this, randomSpawn.x, randomSpawn.y, 'banana', false);
+            this.tempTarget = new Target(this, randomSpawn.x, randomSpawn.y, 'banana', false);
         }
-        this.targetArray.push(this.target);
+        this.targetArray.push(this.tempTarget);
         }
     }
 
