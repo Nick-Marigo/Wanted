@@ -31,6 +31,8 @@ class Play extends Phaser.Scene {
             this.scene.restart();
         });
 
+        // Shader
+        this.add.shader('grid_mask', 0, 0, width, height, [ 'grid-mask', 'banana' ]).setOrigin(0, 0).setBlendMode(Phaser.BlendModes.NORMAL);
     }
 
     update() {
