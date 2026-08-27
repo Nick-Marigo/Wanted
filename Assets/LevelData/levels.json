@@ -1,0 +1,22 @@
+{
+    "level": "1",
+    "type": "still",
+    "spawnpoints": [
+        {
+            "x": "width / 2 - 32",
+            "y": "height / 2 - 32"
+        },
+        {
+            "x": "width / 2 + 32",
+            "y": "height / 2 + 32"
+        },
+        {
+            "x": "width / 2 - 32",
+            "y": "height / 2 + 32"
+        },
+        {
+            "x": "width / 2 + 32",
+            "y": "height / 2 + 32"
+        }
+    ]
+}

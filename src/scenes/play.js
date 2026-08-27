@@ -13,6 +13,10 @@ class Play extends Phaser.Scene {
 
         this.spawnTargets();
 
+        const leveldata = this.cache.json.get('levelData');
+
+        console.log(leveldata);
+
         // Handles mouse input anywhere on the map
         this.input.on('pointerdown', (pointer) => {
             //console.log(pointer.x, pointer.y, this.wantedX, this.wantedY);
@@ -32,7 +36,7 @@ class Play extends Phaser.Scene {
         });
 
         // Shader
-        this.add.shader('grid_mask', 0, 0, width, height, [ 'grid-mask', 'banana' ]).setOrigin(0, 0).setBlendMode(Phaser.BlendModes.NORMAL);
+        //this.add.shader('grid_mask', 0, 0, width, height, [ 'grid-mask', 'banana' ]).setOrigin(0, 0).setBlendMode(Phaser.BlendModes.NORMAL);
     }
 
     update() {
