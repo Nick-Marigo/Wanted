@@ -2,20 +2,26 @@ class Play extends Phaser.Scene {
 
     constructor() {
         super('playScene');
+
+        this.level = 0;
     }
 
     create() {
 
         this.targetArray = [];
         this.target;
+        this.level++;
 
         this.timer = new GameTimer(this, 30);
 
+        const levelDataALL = this.cache.json.get('levelData');
+
+        console.log(levelDataALL);
+
+        this.currentLevelData = levelDataALL["level_" + this.level];
+        console.log(this.currentLevelData);
+
         this.spawnTargets();
-
-        const leveldata = this.cache.json.get('levelData');
-
-        console.log(leveldata);
 
         // Handles mouse input anywhere on the map
         this.input.on('pointerdown', (pointer) => {
@@ -50,6 +56,12 @@ class Play extends Phaser.Scene {
         return new Phaser.Math.Vector2(randomX, randomY);
     }
 
+    getSpawnPoint(spawnCount){
+        const spawnX = this.currentLevelData.spawnpoints[spawnCount].x;
+        const spawnY = this.currentLevelData.spawnpoints[spawnCount].y;
+        return new Phaser.Math.Vector2(spawnX, spawnY);
+    }
+
     // Checks if the pointer click is over the target
     checkIfWanted(pointer) {
         return (this.target.x - 16 < pointer.x && 
@@ -63,9 +75,13 @@ class Play extends Phaser.Scene {
         this.targetArray.forEach(image => image.destroy());
         this.targetArray = [];
 
-        for (let i = 0; i < 5; i++) {
-        const randomSpawn = this.createRandomSpawnPoint();
-        if(i == 3) {
+        let amount = this.currentLevelData.amount;
+        let targetSpawnpoint = Phaser.Math.Between(0, amount - 1);
+
+        for (let i = 0; i < amount; i++) {
+        //const randomSpawn = this.createRandomSpawnPoint();
+        const randomSpawn = this.getSpawnPoint(i);
+        if(i == targetSpawnpoint) {
             this.tempTarget = new Target(this, randomSpawn.x, randomSpawn.y, 'slug', true);
             this.target = this.tempTarget;
         } else {
@@ -78,3 +94,22 @@ class Play extends Phaser.Scene {
     
 
 }
+
+/*
+{
+                "x": "width / 2 - 32",
+                "y": "height / 2 - 32"
+            },
+            {
+                "x": "width / 2 + 32",
+                "y": "height / 2 + 32"
+            },
+            {
+                "x": "width / 2 - 32",
+                "y": "height / 2 + 32"
+            },
+            {
+                "x": "width / 2 + 32",
+                "y": "height / 2 + 32"
+            }
+                */
